@@ -15,5 +15,7 @@ protocol PresenterProtocol {
     func getNotesCount() -> Int
     func getNoteHeader(noteNumber: Int) -> String
 	func saveNewNote(header: String, text: String) 
-	
+	func deleteNote(noteNumber: Int)
+	func changeNote(noteNumber: Int, header: String, text: String)
+	func getNoteText(noteNumber: Int) -> String 
 }

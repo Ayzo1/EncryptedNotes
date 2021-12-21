@@ -3,6 +3,7 @@ import UIKit
 class NoteDetailsViewController: UIViewController, UITextViewDelegate {
     
     public var presenter: PresenterProtocol!
+	public var noteID: Int = -1
     
     private lazy var headerTextView: UITextView = {
         let textView = UITextView()
@@ -42,7 +43,13 @@ class NoteDetailsViewController: UIViewController, UITextViewDelegate {
 		header = headerTextView.text
 		text = generalTextView.text
 		print(" details: " + header)
-		presenter.saveNewNote(header: header, text: text)
+		if noteID == -1 {
+			presenter.saveNewNote(header: header, text: text)
+		}
+		else {
+			presenter.changeNote(noteNumber: noteID, header: header, text: text)
+		}
 		navigationController?.popToRootViewController(animated: true)
 	}
+	
 }

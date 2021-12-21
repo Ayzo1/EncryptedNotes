@@ -15,7 +15,7 @@ final class Notes {
 		
 		let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
 		do {
-			notes = try context?.fetch(fetchRequest) as [Note]
+			notes = try context?.fetch(fetchRequest) as! [Note]
 		} catch let error as NSError {
 			print(error.localizedDescription)
 		}
@@ -40,10 +40,16 @@ final class Notes {
         } catch let error as NSError{
             print(error.localizedDescription)
         }
-		
     }
     
     public func deleteNote ( index: Int ) {
+		let note = notes[index]
+		context?.delete(note as NSManagedObject)
+		do {
+			try context?.save()
+		} catch let error as NSError{
+			print(error.localizedDescription)
+		}
         notes.remove(at: index)
     }
 	

@@ -18,6 +18,8 @@ class NotesTableViewController: UIViewController, UITableViewDelegate, UITableVi
         presenter = Presenter(notesTableView: self, notes: Notes())
         table.dataSource = self
         table.delegate = self
+		navigationItem.title = "Encrypted notes"
+		navigationController?.navigationBar.prefersLargeTitles = true
         print (table.superview?.frame.size.height ?? 0)
         print (table.frame.size.height)
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonAction))
@@ -45,9 +47,21 @@ class NotesTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let noteDetails = storyboard.instantiateViewController(identifier: "NoteDetailsViewController") as! NoteDetailsViewController
+		
+		let header = presenter.getNoteHeader(noteNumber: indexPath.row)
+		let text = presenter.getNoteText(noteNumber: indexPath.row)
+		noteDetails.header = header
+		noteDetails.text = text
+		noteDetails.noteID = indexPath.row
+		noteDetails.presenter = presenter
         navigationController?.pushViewController(noteDetails, animated: true)
         table.deselectRow(at: indexPath, animated: true)
     }
+	
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		presenter.deleteNote(noteNumber: indexPath.row)
+		table.reloadData()
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
