@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8FB7460A2772342800BBD163 /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB746092772342800BBD163 /* Encryptor.swift */; };
+		8FB7464A27727B7400BBD163 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB7464927727B7400BBD163 /* Note+CoreDataProperties.swift */; };
 		8FF1CEB627551E2C0050F019 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1CEB527551E2C0050F019 /* AppDelegate.swift */; };
 		8FF1CEB827551E2C0050F019 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1CEB727551E2C0050F019 /* SceneDelegate.swift */; };
 		8FF1CEBD27551E2C0050F019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FF1CEBB27551E2C0050F019 /* Main.storyboard */; };
@@ -22,7 +24,6 @@
 		8FF1CF0E2755276D0050F019 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1CF0D2755276D0050F019 /* Notes.swift */; };
 		8FF1CF1627553E680050F019 /* NoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1CF1527553E680050F019 /* NoteDetailsViewController.swift */; };
 		8FF1CF24275669140050F019 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1CF22275669140050F019 /* Note+CoreDataClass.swift */; };
-		8FF1CF25275669140050F019 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1CF23275669140050F019 /* Note+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +43,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8FB7463C2772441B00BBD163 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8FB746092772342800BBD163 /* Encryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
+		8FB7464927727B7400BBD163 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8FF1CEB227551E2C0050F019 /* EncryptedNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EncryptedNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF1CEB527551E2C0050F019 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF1CEB727551E2C0050F019 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +80,6 @@
 		8FF1CF0D2755276D0050F019 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		8FF1CF1527553E680050F019 /* NoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewController.swift; sourceTree = "<group>"; };
 		8FF1CF22275669140050F019 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8FF1CF23275669140050F019 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Note+CoreDataProperties.swift"; path = "EncryptedNotes/Model/Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,15 +107,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8FB74628277240A200BBD163 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8FF1CEA927551E2C0050F019 = {
 			isa = PBXGroup;
 			children = (
-				8FF1CF23275669140050F019 /* Note+CoreDataProperties.swift */,
+				8FB7464927727B7400BBD163 /* Note+CoreDataProperties.swift */,
 				8FF1CF22275669140050F019 /* Note+CoreDataClass.swift */,
 				8FF1CEB427551E2C0050F019 /* EncryptedNotes */,
 				8FF1CECE27551E3A0050F019 /* EncryptedNotesTests */,
 				8FF1CED927551E3B0050F019 /* EncryptedNotesUITests */,
 				8FF1CEB327551E2C0050F019 /* Products */,
+				8FB74628277240A200BBD163 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				8FF1CF0D2755276D0050F019 /* Notes.swift */,
+				8FB746092772342800BBD163 /* Encryptor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +218,7 @@
 				8FF1CEAE27551E2C0050F019 /* Sources */,
 				8FF1CEAF27551E2C0050F019 /* Frameworks */,
 				8FF1CEB027551E2C0050F019 /* Resources */,
+				8FB7463C2772441B00BBD163 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,7 +288,7 @@
 				};
 			};
 			buildConfigurationList = 8FF1CEAD27551E2C0050F019 /* Build configuration list for PBXProject "EncryptedNotes" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -317,9 +342,10 @@
 				8FF1CF092755268A0050F019 /* Viewable.swift in Sources */,
 				8FF1CEB627551E2C0050F019 /* AppDelegate.swift in Sources */,
 				8FF1CF24275669140050F019 /* Note+CoreDataClass.swift in Sources */,
+				8FB7464A27727B7400BBD163 /* Note+CoreDataProperties.swift in Sources */,
 				8FF1CF1627553E680050F019 /* NoteDetailsViewController.swift in Sources */,
+				8FB7460A2772342800BBD163 /* Encryptor.swift in Sources */,
 				8FF1CEFA275522F30050F019 /* NotesTableViewController.swift in Sources */,
-				8FF1CF25275669140050F019 /* Note+CoreDataProperties.swift in Sources */,
 				8FF1CF04275525F70050F019 /* PresenterProtocol.swift in Sources */,
 				8FF1CEC027551E2C0050F019 /* EncryptedNotes.xcdatamodeld in Sources */,
 				8FF1CEB827551E2C0050F019 /* SceneDelegate.swift in Sources */,

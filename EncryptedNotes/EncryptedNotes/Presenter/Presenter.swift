@@ -29,6 +29,37 @@ final class Presenter: PresenterProtocol {
 		notes.addNote(header: header, text: text)
 	}
 	
+	public func isEncrypted(noteNumber: Int) -> Bool {
+		return notes.notes[noteNumber].isEncrypted
+	}
+	
+	public func encryptNote(noteNumber: Int, password: String) {
+		var cipherText = ""
+		do {
+			cipherText = try Encryptor.encrypt(password: password, text: notes.notes[noteNumber].text ?? "")
+		} catch {
+			print(error.localizedDescription)
+		}
+		notes.notes[noteNumber].text = cipherText
+		notes.notes[noteNumber].isEncrypted = true
+		do {
+			try notes.context?.save()
+		} catch let error as NSError{
+			print(error.localizedDescription)
+		}
+	}
+	
+	func decryptNote(noteNumber: Int, password: String) throws {
+		let text = try Encryptor.decrypt(cipherText: notes.notes[noteNumber].text ?? "", password: password)
+		notes.notes[noteNumber].text = text
+		notes.notes[noteNumber].isEncrypted = false
+		do {
+			try notes.context?.save()
+		} catch let error as NSError{
+			print(error.localizedDescription)
+		}
+	}
+	
 	func changeNote(noteNumber: Int, header: String, text: String) {
 		notes.notes[noteNumber].header = header
 		notes.notes[noteNumber].text = text

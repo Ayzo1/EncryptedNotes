@@ -12,7 +12,7 @@ class NotesTableViewController: UIViewController, UITableViewDelegate, UITableVi
         table.register(UITableViewCell.self, forCellReuseIdentifier: "NoteCell")
         return table
     }()
-    
+		
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = Presenter(notesTableView: self, notes: Notes())
@@ -20,8 +20,6 @@ class NotesTableViewController: UIViewController, UITableViewDelegate, UITableVi
         table.delegate = self
 		navigationItem.title = "Encrypted notes"
 		navigationController?.navigationBar.prefersLargeTitles = true
-        print (table.superview?.frame.size.height ?? 0)
-        print (table.frame.size.height)
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonAction))
     }
     
@@ -38,8 +36,6 @@ class NotesTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
-		let a = presenter.getNoteHeader(noteNumber: indexPath.row)
-		print("header: " + a)
         cell.textLabel?.text = presenter.getNoteHeader(noteNumber: indexPath.row)
         return cell
     }
@@ -61,6 +57,46 @@ class NotesTableViewController: UIViewController, UITableViewDelegate, UITableVi
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		presenter.deleteNote(noteNumber: indexPath.row)
 		table.reloadData()
+	}
+	
+	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		let isEncrypted = presenter.isEncrypted(noteNumber: indexPath.row)
+		var image = UIImage(systemName: "lock")
+		var title = "Введите пароль для шифрования"
+		if isEncrypted {
+			image = UIImage(systemName: "lock.open")
+			title = "Введите пароль для расшифровки"
+		}
+		let swipeRoad = UIContextualAction(style: .normal, title: "") {(action, view, success) in
+			let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+			 
+			alert.addTextField(configurationHandler: { textField in
+				textField.placeholder = "Пароль"
+			})
+			 
+			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+				if let password = alert.textFields?.first?.text {
+					if !isEncrypted {
+						self.presenter.encryptNote(noteNumber: indexPath.row, password: password)
+					} else {
+						do {
+							try self.presenter.decryptNote(noteNumber: indexPath.row, password: password)
+						} catch {
+							alert.message = "Неправильный пароль"
+							alert.message.
+							self.present(alert, animated: true)
+						}
+					}
+					self.table.reloadData()
+				}
+			}))
+			 
+			self.present(alert, animated: true)
+		}
+		swipeRoad.image = image
+		swipeRoad.backgroundColor = .systemYellow
+		return UISwipeActionsConfiguration(actions: [swipeRoad])
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
